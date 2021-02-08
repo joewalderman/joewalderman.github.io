@@ -9,12 +9,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Joe Walderman
 
-[email](jwalderman@bren.ucsb.edu) \| (646) 943-4373\| Santa Barbara, CA
+[jwalderman@bren.ucsb.edu](jwalderman@bren.ucsb.edu) | (646) 943-4373 | Santa Barbara, CA | [LinkedIn](https://www.linkedin.com/in/joseph-walderman/)
 
-**Education**
-
+**EDUCATION**\
 **Master of Environmental Science and Management** 3.92 GPA (expected June 2022)\
-**Bren School of Environmental Science and Managements -- University of California, Santa Barbara\
+**Bren School of Environmental Science and Managements -- University of California, Santa Barbara**\
 Specialization: Energy and Climate, Corporate Environmental Management\
 
 **BA in Environmental Studies | BA in Geography** (May 2017)\
@@ -29,7 +28,7 @@ Specialization: Energy and Climate, Corporate Environmental Management\
 •	Designed ArcGIS model to identify optimal location for implementation of the first solar panel arrays financed through Virginia’s PPA pilot program\
 •	Presented project at VAMLIS GeoCon2017 to 35 participants with $800 university travel grant\
 
-**PROFESSIONAL EXPERIENCE**
+**PROFESSIONAL EXPERIENCE**\
 **Program Coordinator – Elysian Energy**, Laurel, MD (8/17–11/19)\
 •	Spearheaded coordination and delivery of 30+ multifamily energy efficiency projects from inception to closing\
 •	Yielded $700K in government contracted revenue, saved residents 5.6MM kWh, and abated 8K tons of CO2\
@@ -41,7 +40,7 @@ Specialization: Energy and Climate, Corporate Environmental Management\
 •	Calculated and reported GHG emissions for AASHE STARS rating of campus sustainability\
 •	Developed and promoted Green Room Certification Program for sustainable living in dorm rooms\
 
-**ADDITIONAL EXPERIENCE**
+**ADDITIONAL EXPERIENCE**\
 **Research Associate – The Climate Board**, Laguna Beach, CA (7/20-9/20)\
 •	Developed report on opportunities for decarbonization in textile industry to guide development of best practices\
 •	Compiled exhaustive CDP-based log of companies involved in carbon reduction pledges and their decarbonization targets to identify potential clients\
@@ -49,7 +48,7 @@ Specialization: Energy and Climate, Corporate Environmental Management\
 **Eco-Adventures Guide – Telluride Adventure Center**, Telluride, CO (12/19-3/20)\
 •	Cultivated young guest’s appreciation of natural environment and outdoor recreation using team leadership, efficient group organization, and strong interpersonal skills\
  
-**SKILLS & CERTIFICATIONS**
+**SKILLS & CERTIFICATIONS**\
 **Computer:** ArcGIS, Rstudio, Salesforce, Microsoft Office (Word, Excel, PowerPoint), Adobe Suite, Google Suite\
 **Certifications:** LEED Green Associate, BPI Building Analyst, PSIA Level 1\
 
