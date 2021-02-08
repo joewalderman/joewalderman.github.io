@@ -1,15 +1,17 @@
 name: "."
 title: "Joe"
 description: |
-  mfeo
+  joe walderman
 output_dir: "docs"
 navbar:
   right:
     - text: "Home"
       href: index.html
-    - text: "About"
+    - text: "About Me"
       href: about.html
     - text: "Blog"
       href: blog.html
+    - text: "CV"
+      href: cv.html
 output: distill::distill_article
 theme: postcards.css

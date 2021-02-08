@@ -1,0 +1,55 @@
+---
+title: "CV"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Joe Walderman
+
+[email](jwalderman@bren.ucsb.edu) \| (646) 943-4373\| Santa Barbara, CA
+
+**Education**
+
+**Master of Environmental Science and Management** 3.92 GPA (expected June 2022)\
+**Bren School of Environmental Science and Managements -- University of California, Santa Barbara\
+Specialization: Energy and Climate, Corporate Environmental Management\
+
+**BA in Environmental Studies | BA in Geography** (May 2017)\
+**University of Richmond (UR)**, Richmond, VA\
+
+**CLEAN ENERGY PROJECTS**\
+**Senior Capstone: Achieving Waste and Emissions Reductions Goals: The Biodigestor Approach** (1/17-4/17)\
+•	Constructed extensive feasibility analysis for UR campus to install onsite waste-to-energy anaerobic\ digester to divert 650 lbs/day of cafeteria food waste and abate 115 m3/day methane emissions from landfill\
+•	Presented cost/benefit, payback period, and risk assessment to University Facilities, Budget Committee, and Undergraduate Research Symposium to help reach Climate Action Plan goals\
+ 
+**Using LiDAR to Site Solar Panels on UR Campus Project, Advanced Spatial Analysis** (1/17-3/17)\
+•	Designed ArcGIS model to identify optimal location for implementation of the first solar panel arrays financed through Virginia’s PPA pilot program\
+•	Presented project at VAMLIS GeoCon2017 to 35 participants with $800 university travel grant\
+
+**PROFESSIONAL EXPERIENCE**
+**Program Coordinator – Elysian Energy**, Laurel, MD (8/17–11/19)\
+•	Spearheaded coordination and delivery of 30+ multifamily energy efficiency projects from inception to closing\
+•	Yielded $700K in government contracted revenue, saved residents 5.6MM kWh, and abated 8K tons of CO2\
+•	Pitched value propositions to regional and asset managers and acted as primary contact point for largest real estate trusts in D.C. area\
+•	Drove communication with utility program funders (ICF) and ensured compliance with preapproval and QC\
+•	Led crews, managed data, and reported savings from light and water fixture installations for 5K+ residences\
+
+**Sustainability Intern – University of Richmond Office of Sustainability**, Richmond, VA (8/16-5/17)\
+•	Calculated and reported GHG emissions for AASHE STARS rating of campus sustainability\
+•	Developed and promoted Green Room Certification Program for sustainable living in dorm rooms\
+
+**ADDITIONAL EXPERIENCE**
+**Research Associate – The Climate Board**, Laguna Beach, CA (7/20-9/20)\
+•	Developed report on opportunities for decarbonization in textile industry to guide development of best practices\
+•	Compiled exhaustive CDP-based log of companies involved in carbon reduction pledges and their decarbonization targets to identify potential clients\
+
+**Eco-Adventures Guide – Telluride Adventure Center**, Telluride, CO (12/19-3/20)\
+•	Cultivated young guest’s appreciation of natural environment and outdoor recreation using team leadership, efficient group organization, and strong interpersonal skills\
+ 
+**SKILLS & CERTIFICATIONS**
+**Computer:** ArcGIS, Rstudio, Salesforce, Microsoft Office (Word, Excel, PowerPoint), Adobe Suite, Google Suite\
+**Certifications:** LEED Green Associate, BPI Building Analyst, PSIA Level 1\
+

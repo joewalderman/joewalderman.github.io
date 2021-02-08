@@ -2,18 +2,18 @@
   {
     "path": "posts/2021-01-21-welcome/",
     "title": "welcome",
-    "description": "A short description of the post.",
+    "description": "Wlcome to my blog!",
     "author": [
       {
-        "name": "Unknown",
+        "name": "joe walderman",
         "url": {}
       }
     ],
     "date": "2021-01-21",
     "categories": [],
-    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+    "contents": "\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-01-21T22:38:06-08:00",
+    "last_modified": "2021-02-07T22:35:33-08:00",
     "input_file": {}
   }
 ]

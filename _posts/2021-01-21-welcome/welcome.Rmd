@@ -1,9 +1,8 @@
 ---
 title: "welcome"
-description: |
-  A short description of the post.
+description: Wlcome to my blog!
 author:
-  - name: Unknown
+  - name: joe walderman
 date: 01-21-2021
 output:
   distill::distill_article:
@@ -15,8 +14,5 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
-
-Learn more about using Distill at <https://rstudio.github.io/distill>.
 
 
