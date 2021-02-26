@@ -1,5 +1,39 @@
 [
   {
+    "path": "posts/2021-02-25-catch-22-text-analysis/",
+    "title": "Text Analysis of Joseph Heller's Catch-22",
+    "description": "Utilizing a variety of text wrangling packages and techniques, we will analyze word usage frequency and sentiments from Joseph Heller's *Catch-22*.",
+    "author": [
+      {
+        "name": "Joe Walderman",
+        "url": {}
+      }
+    ],
+    "date": "2021-02-25",
+    "categories": [],
+    "contents": "\r\n\r\n“There was no telling what people might find out once they felt free to ask whatever questions they wanted to.”\r\n\r\nCatch-22 Text Wrangling\r\nSplit up the text by line and trim excess white space\r\n\r\nShow code\r\n# Reading in book pdf\r\ncatch22 <- pdf_text(here(\"_posts\", \"2021-02-25-catch-22-text-analysis\", \"data\", \"Catch-22.pdf\"))\r\n\r\n# Tidy data frame\r\ncatch22_tidy <- data.frame(catch22) %>% \r\n  mutate(text_full = str_split(catch22, pattern = \"\\\\n\")) %>% \r\n  unnest(text_full) %>% #making each line its own observation\r\n  mutate(text_full = str_trim(text_full))\r\n\r\ncatch22_df <- catch22_tidy %>% \r\n  slice(-(1:54)) %>% #getting rid of preface and table of contents\r\n  mutate(chapter = case_when(\r\n    str_detect(text_full, pattern = \"CHAPTER\") ~ text_full,\r\n               TRUE ~ NA_character_\r\n  )) %>% \r\n  fill(chapter) %>% \r\n  separate(col = chapter, into = c(\"chap\", \"title\"), sep = \" - \", extra = \"merge\") %>% \r\n  separate(col = chap, into = c(\"ch\", \"no\"), sep = \" \") %>% \r\n  mutate(chapter = as.numeric(no))\r\n\r\n\r\n\r\nGet word counts by chapter.\r\n\r\nShow code\r\n#getting tokens\r\ncatch22_tokens <- catch22_df %>% \r\n  unnest_tokens(word, text_full) %>% \r\n  select(-catch22)\r\n\r\n#wordcount by chapter\r\ncatch22_count <- catch22_tokens %>% \r\n  count(chapter, word)\r\n\r\n\r\n\r\nRemove common stop words such as “it”, “the”, and “a”.\r\n\r\nShow code\r\n#stopword removal\r\ncatch22_nonstop <- catch22_tokens %>% \r\n  anti_join(stop_words)\r\n\r\n#wordcount without stopwords\r\nnonstop_counts <- catch22_nonstop %>% \r\n  count(chapter, word)\r\n\r\n\r\n\r\nFinally, remove common names and titles for a more interesting picture of word usage by chapter.\r\n\r\nShow code\r\nnames <- c(\"yossarian\", \"yossarian's\", \"milo\", \"clevinger\", \"cathcart\", \"lieutenant\", \"captain\", \"colonel\", \"daneeka\", \"joe\", \"havermeyer\", \"cargill\", \"aarfy\", \"dreedle\", \"whitcomb\", \"danby\", \"scheisskopf\", \"nately\", \"orr\", \"peckem\", \"dunbar\", \"dreedle\", \"havermeyer\", \"mcwatt\", \"scheisskopf's\", \"corporal\", \"milo's\", \"korn\", \"korn's\", \"ferredge\", \"cramer\", \"cramer's\", \"ewing\", \"ewing's\", \"duckett\", \"pazzo\", \"snowden\", \"giuseppe\", \"sanderson\", \"moodus\", \"irving's\", \"dobbs\", \"sergeant\", \"coverley\", \"cathcart's\", \"aarfy's\", \"oran\", \"sampson\", \"fortiori\", \"wes\", \"danby's\", \"dreedle's\", \"whitcomb's\", \"colonel's\", \"appleby\", \"major\", \"lieutenant's\", \"nately's\", \"chaplain\", \"chaplain's\", \"washington\", \"metcalf\", \"metcalf's\", \"halfoat\", \"halfoat's\")\r\n\r\nnames_df <- as.data.frame(names) %>% \r\n  rename(word = names)\r\n\r\nno_names <- catch22_nonstop %>% \r\n  anti_join(names_df)\r\n\r\ncounts_no_names <- no_names %>% \r\n  count(chapter, word)\r\n\r\n\r\n\r\nVisualize the Results\r\n1) Top 5 words in Catch-22 part 2\r\n\r\nShow code\r\n#Find the top 5 words for part 2\r\n\r\ntop5_part2 <- counts_no_names %>% \r\n  filter(chapter %in% c(15:28)) %>% \r\n  group_by(chapter) %>% \r\n  arrange(-n) %>% \r\n  slice(1:5)\r\n\r\n#Making a visualization\r\nggplot(data = top5_part2, aes(x = word, y = n)) +\r\n  geom_col(fill = \"maroon\") +\r\n  facet_wrap(~chapter, scales = \"free\") +\r\n  coord_flip() +\r\n  theme_minimal() +\r\n  theme(text = element_text(size = 8),\r\n        plot.title = element_text(hjust = .6, size = 13)) +\r\n  labs(x = \"Word\",\r\n       y = \"Count\")\r\n\r\n\r\n\r\n\r\nFigure 1: Column graphs faceted by chapter to display top 5 most commonly used words in Joseph Heller’s Catch-22 part 2 (chapters 15-28). Stop words such as “it”, “us”, and “a” were removed in addition to character names and titles.\r\n2) Top 50 Words in Catch-22 Chapter 9: “Major Major Major Major”\r\n\r\nShow code\r\n#Getting top 50 words from chapter 9\r\nch9_top50 <- nonstop_counts %>% \r\n  filter(chapter == 9) %>% \r\n  arrange(-n) %>% \r\n  slice(1:50)\r\n\r\n#Reading in background image\r\ncatch <- jpeg::readJPEG(here(\"_posts\", \"2021-02-25-catch-22-text-analysis\", \"data\", \"catch-221.jpg\"))\r\n\r\n#Creating wordcloud\r\nch9_cloud <- ggplot(data = ch9_top50, aes(label = word)) +\r\n  background_image(catch) +\r\n  geom_text_wordcloud(aes(color = n, size = n), shape = \"triangle-forward\") +\r\n  scale_color_gradientn(colors = c(\"orange\", \"orange2\", \"orangered2\"))  +\r\n  scale_size_area(max_size = 23) +\r\n  theme_minimal()\r\n\r\n#Calling in output\r\nch9_cloud\r\n\r\n\r\n\r\n\r\nFigure 2: Wordcloud displaying the top 50 words used in Catch-22 chapter 9: “Major Major Major Major”. Stop words were removed but character names were left intact to show the impact of a character named Major Major Major Major.\r\nConduct Sentiment Analysis\r\nWe will conduct a sentiment analysis of Catch-22, looking at whether the words use in chapters of the book have positive or negative connotation in accordance with numerical ratings assigned by the AFINN lexicon. Given the book’s themes of war and absurdity and heavy usage of dark humor the expectation is a fairly consistent negative sentiment throughout the book\r\n3) Sentiment Analysis of Catch-22 using AFINN lexicon\r\n\r\nShow code\r\ncatch22_afinn <- catch22_nonstop %>% \r\n  inner_join(get_sentiments(\"afinn\"))\r\n\r\nafinn_counts <- catch22_afinn %>% \r\n  count(chapter, value)\r\n\r\nafinn_means <- catch22_afinn %>% \r\n  group_by(chapter) %>% \r\n  summarize(mean_afinn = mean(value))\r\n\r\nggplot(data = afinn_means,\r\n       aes(x = chapter, y = mean_afinn)) +\r\n  geom_col(fill = \"goldenrod\") +\r\n  coord_flip() +\r\n  theme_minimal() +\r\n  labs(x = \"Chapter\",\r\n       y = \"Mean Sentiment\")\r\n\r\n\r\n\r\n\r\nFigure 3: Column graph showcasing the average sentiments of Catch-22 using the AFINN lexicon. Mean sentiment values less than zero indicate that on average, the words used in a particular chapter had more negative connotations than those with mean sentiments greater than zero.\r\nCitation:\r\nHeller, Joseph, 1798-1849. Catch-22, a Novel. New York :The Modern library, 1961.\r\n\r\n\r\n\r\n",
+    "preview": "posts/2021-02-25-catch-22-text-analysis/catch-22-text-analysis_files/figure-html5/unnamed-chunk-5-1.png",
+    "last_modified": "2021-02-25T19:56:13-08:00",
+    "input_file": "catch-22-text-analysis.utf8.md"
+  },
+  {
+    "path": "posts/2021-02-09-anaerobic-digestor/",
+    "title": "anaerobic-digestor",
+    "description": "This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus.",
+    "author": [
+      {
+        "name": "joe walderman",
+        "url": {}
+      }
+    ],
+    "date": "2021-02-09",
+    "categories": [],
+    "contents": "\nSummary\nMain Takeaways\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill at https://rstudio.github.io/distill.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-02-09T20:34:31-08:00",
+    "input_file": "anaerobic-digestor.utf8.md"
+  },
+  {
     "path": "posts/2021-01-21-welcome/",
     "title": "welcome",
     "description": "Wlcome to my blog!",

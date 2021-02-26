@@ -20,18 +20,19 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -51,7 +52,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
@@ -85,38 +86,38 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Joe: welcome</title>
+<title>Joe: Text Analysis of Joseph Heller's Catch-22</title>
 
-<meta property="description" itemprop="description" content="Wlcome to my blog!"/>
+<meta property="description" itemprop="description" content="Utilizing a variety of text wrangling packages and techniques, we will analyze word usage frequency and sentiments from Joseph Heller&#39;s *Catch-22*."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-01-21"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-01-21"/>
-<meta name="article:author" content="joe walderman"/>
+<meta property="article:published" itemprop="datePublished" content="2021-02-25"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-02-25"/>
+<meta name="article:author" content="Joe Walderman"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Joe: welcome"/>
+<meta property="og:title" content="Joe: Text Analysis of Joseph Heller&#39;s Catch-22"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="Wlcome to my blog!"/>
+<meta property="og:description" content="Utilizing a variety of text wrangling packages and techniques, we will analyze word usage frequency and sentiments from Joseph Heller&#39;s *Catch-22*."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Joe"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Joe: welcome"/>
-<meta property="twitter:description" content="Wlcome to my blog!"/>
+<meta property="twitter:title" content="Joe: Text Analysis of Joseph Heller&#39;s Catch-22"/>
+<meta property="twitter:description" content="Utilizing a variety of text wrangling packages and techniques, we will analyze word usage frequency and sentiments from Joseph Heller&#39;s *Catch-22*."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["welcome"]},{"type":"character","attributes":{},"value":["Wlcome to my blog!"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["joe walderman"]}]}]},{"type":"character","attributes":{},"value":["01-21-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Text Analysis of Joseph Heller's Catch-22"]},{"type":"character","attributes":{},"value":["Utilizing a variety of text wrangling packages and techniques, we will analyze word usage frequency and sentiments from Joseph Heller's *Catch-22*."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Joe Walderman"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["02-25-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["welcome_files/anchor-4.2.2/anchor.min.js","welcome_files/bowser-1.9.3/bowser.min.js","welcome_files/distill-2.2.21/template.v2.js","welcome_files/header-attrs-2.6/header-attrs.js","welcome_files/jquery-1.11.3/jquery.min.js","welcome_files/popper-2.6.0/popper.min.js","welcome_files/tippy-6.2.7/tippy-bundle.umd.min.js","welcome_files/tippy-6.2.7/tippy-light-border.css","welcome_files/tippy-6.2.7/tippy.css","welcome_files/tippy-6.2.7/tippy.umd.min.js","welcome_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["catch-22-text-analysis_files/anchor-4.2.2/anchor.min.js","catch-22-text-analysis_files/bowser-1.9.3/bowser.min.js","catch-22-text-analysis_files/distill-2.2.21/template.v2.js","catch-22-text-analysis_files/figure-html5/unnamed-chunk-5-1.png","catch-22-text-analysis_files/figure-html5/unnamed-chunk-6-1.png","catch-22-text-analysis_files/figure-html5/unnamed-chunk-7-1.png","catch-22-text-analysis_files/jquery-1.11.3/jquery.min.js","catch-22-text-analysis_files/popper-2.6.0/popper.min.js","catch-22-text-analysis_files/tippy-6.2.7/tippy-bundle.umd.min.js","catch-22-text-analysis_files/tippy-6.2.7/tippy-light-border.css","catch-22-text-analysis_files/tippy-6.2.7/tippy.css","catch-22-text-analysis_files/tippy-6.2.7/tippy.umd.min.js","catch-22-text-analysis_files/webcomponents-2.0.0/webcomponents.js","data/Catch-22.pdf","data/catch-221.jpg"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2350,7 +2351,6 @@ d-appendix d-footnote-list a.footnote-backlink {
   color: var(--hover-color, white);
 }</style>
 <!--/radix_placeholder_distill-->
-  <script src="../../site_libs/header-attrs-2.6/header-attrs.js"></script>
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -2371,7 +2371,7 @@ d-appendix d-footnote-list a.footnote-backlink {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"welcome","description":"Wlcome to my blog!","authors":[{"author":"joe walderman","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-01-21T00:00:00.000+00:00","citationText":"walderman, 2021"}
+{"title":"Text Analysis of Joseph Heller's Catch-22","description":"Utilizing a variety of text wrangling packages and techniques, we will analyze word usage frequency and sentiments from Joseph Heller's *Catch-22*.","authors":[{"author":"Joe Walderman","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-02-25T00:00:00.000-08:00","citationText":"Walderman, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2396,19 +2396,195 @@ d-appendix d-footnote-list a.footnote-backlink {
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>welcome</h1>
+<h1>Text Analysis of Joseph Heller’s Catch-22</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p>Wlcome to my blog!</p>
+<p>Utilizing a variety of text wrangling packages and techniques, we will analyze word usage frequency and sentiments from Joseph Heller’s <em>Catch-22</em>.</p>
 </div>
 
 <div class="d-byline">
-  joe walderman  
+  Joe Walderman true 
   
-<br/>01-21-2021
+<br/>02-25-2021
 </div>
 
 <div class="d-article">
+<blockquote>
+<p>“There was no telling what people might find out once they felt free to ask whatever questions they wanted to.”</p>
+</blockquote>
+<h2 id="catch-22-text-wrangling">Catch-22 Text Wrangling</h2>
+<p>Split up the text by line and trim excess white space</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Reading in book pdf</span>
+<span class='va'>catch22</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://docs.ropensci.org/pdftools/reference/pdftools.html'>pdf_text</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='st'>"_posts"</span>, <span class='st'>"2021-02-25-catch-22-text-analysis"</span>, <span class='st'>"data"</span>, <span class='st'>"Catch-22.pdf"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Tidy data frame</span>
+<span class='va'>catch22_tidy</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='va'>catch22</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>text_full <span class='op'>=</span> <span class='fu'>str_split</span><span class='op'>(</span><span class='va'>catch22</span>, pattern <span class='op'>=</span> <span class='st'>"\\n"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>unnest</span><span class='op'>(</span><span class='va'>text_full</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'>#making each line its own observation</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>text_full <span class='op'>=</span> <span class='fu'>str_trim</span><span class='op'>(</span><span class='va'>text_full</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>catch22_df</span> <span class='op'>&lt;-</span> <span class='va'>catch22_tidy</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>slice</span><span class='op'>(</span><span class='op'>-</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>54</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'>#getting rid of preface and table of contents</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>chapter <span class='op'>=</span> <span class='fu'>case_when</span><span class='op'>(</span>
+    <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>text_full</span>, pattern <span class='op'>=</span> <span class='st'>"CHAPTER"</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>text_full</span>,
+               <span class='cn'>TRUE</span> <span class='op'>~</span> <span class='cn'>NA_character_</span>
+  <span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>fill</span><span class='op'>(</span><span class='va'>chapter</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>separate</span><span class='op'>(</span>col <span class='op'>=</span> <span class='va'>chapter</span>, into <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"chap"</span>, <span class='st'>"title"</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>" - "</span>, extra <span class='op'>=</span> <span class='st'>"merge"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>separate</span><span class='op'>(</span>col <span class='op'>=</span> <span class='va'>chap</span>, into <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ch"</span>, <span class='st'>"no"</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>" "</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>chapter <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>no</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>Get word counts by chapter.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#getting tokens</span>
+<span class='va'>catch22_tokens</span> <span class='op'>&lt;-</span> <span class='va'>catch22_df</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/tidytext/man/unnest_tokens.html'>unnest_tokens</a></span><span class='op'>(</span><span class='va'>word</span>, <span class='va'>text_full</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>select</span><span class='op'>(</span><span class='op'>-</span><span class='va'>catch22</span><span class='op'>)</span>
+
+<span class='co'>#wordcount by chapter</span>
+<span class='va'>catch22_count</span> <span class='op'>&lt;-</span> <span class='va'>catch22_tokens</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>chapter</span>, <span class='va'>word</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>Remove common stop words such as “it”, “the”, and “a”.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#stopword removal</span>
+<span class='va'>catch22_nonstop</span> <span class='op'>&lt;-</span> <span class='va'>catch22_tokens</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>anti_join</span><span class='op'>(</span><span class='va'>stop_words</span><span class='op'>)</span>
+
+<span class='co'>#wordcount without stopwords</span>
+<span class='va'>nonstop_counts</span> <span class='op'>&lt;-</span> <span class='va'>catch22_nonstop</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>chapter</span>, <span class='va'>word</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>Finally, remove common names and titles for a more interesting picture of word usage by chapter.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>names</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"yossarian"</span>, <span class='st'>"yossarian's"</span>, <span class='st'>"milo"</span>, <span class='st'>"clevinger"</span>, <span class='st'>"cathcart"</span>, <span class='st'>"lieutenant"</span>, <span class='st'>"captain"</span>, <span class='st'>"colonel"</span>, <span class='st'>"daneeka"</span>, <span class='st'>"joe"</span>, <span class='st'>"havermeyer"</span>, <span class='st'>"cargill"</span>, <span class='st'>"aarfy"</span>, <span class='st'>"dreedle"</span>, <span class='st'>"whitcomb"</span>, <span class='st'>"danby"</span>, <span class='st'>"scheisskopf"</span>, <span class='st'>"nately"</span>, <span class='st'>"orr"</span>, <span class='st'>"peckem"</span>, <span class='st'>"dunbar"</span>, <span class='st'>"dreedle"</span>, <span class='st'>"havermeyer"</span>, <span class='st'>"mcwatt"</span>, <span class='st'>"scheisskopf's"</span>, <span class='st'>"corporal"</span>, <span class='st'>"milo's"</span>, <span class='st'>"korn"</span>, <span class='st'>"korn's"</span>, <span class='st'>"ferredge"</span>, <span class='st'>"cramer"</span>, <span class='st'>"cramer's"</span>, <span class='st'>"ewing"</span>, <span class='st'>"ewing's"</span>, <span class='st'>"duckett"</span>, <span class='st'>"pazzo"</span>, <span class='st'>"snowden"</span>, <span class='st'>"giuseppe"</span>, <span class='st'>"sanderson"</span>, <span class='st'>"moodus"</span>, <span class='st'>"irving's"</span>, <span class='st'>"dobbs"</span>, <span class='st'>"sergeant"</span>, <span class='st'>"coverley"</span>, <span class='st'>"cathcart's"</span>, <span class='st'>"aarfy's"</span>, <span class='st'>"oran"</span>, <span class='st'>"sampson"</span>, <span class='st'>"fortiori"</span>, <span class='st'>"wes"</span>, <span class='st'>"danby's"</span>, <span class='st'>"dreedle's"</span>, <span class='st'>"whitcomb's"</span>, <span class='st'>"colonel's"</span>, <span class='st'>"appleby"</span>, <span class='st'>"major"</span>, <span class='st'>"lieutenant's"</span>, <span class='st'>"nately's"</span>, <span class='st'>"chaplain"</span>, <span class='st'>"chaplain's"</span>, <span class='st'>"washington"</span>, <span class='st'>"metcalf"</span>, <span class='st'>"metcalf's"</span>, <span class='st'>"halfoat"</span>, <span class='st'>"halfoat's"</span><span class='op'>)</span>
+
+<span class='va'>names_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>names</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>rename</span><span class='op'>(</span>word <span class='op'>=</span> <span class='va'>names</span><span class='op'>)</span>
+
+<span class='va'>no_names</span> <span class='op'>&lt;-</span> <span class='va'>catch22_nonstop</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>anti_join</span><span class='op'>(</span><span class='va'>names_df</span><span class='op'>)</span>
+
+<span class='va'>counts_no_names</span> <span class='op'>&lt;-</span> <span class='va'>no_names</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>chapter</span>, <span class='va'>word</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<h2 id="visualize-the-results">Visualize the Results</h2>
+<h3 id="top-5-words-in-catch-22-part-2">1) Top 5 words in <em>Catch-22</em> part 2</h3>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#Find the top 5 words for part 2</span>
+
+<span class='va'>top5_part2</span> <span class='op'>&lt;-</span> <span class='va'>counts_no_names</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>chapter</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>15</span><span class='op'>:</span><span class='fl'>28</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>chapter</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>arrange</span><span class='op'>(</span><span class='op'>-</span><span class='va'>n</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>slice</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
+
+<span class='co'>#Making a visualization</span>
+<span class='fu'>ggplot</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>top5_part2</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>word</span>, y <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_col</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"maroon"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>facet_wrap</span><span class='op'>(</span><span class='op'>~</span><span class='va'>chapter</span>, scales <span class='op'>=</span> <span class='st'>"free"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>coord_flip</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_minimal</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>text <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span>,
+        plot.title <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>hjust <span class='op'>=</span> <span class='fl'>.6</span>, size <span class='op'>=</span> <span class='fl'>13</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Word"</span>,
+       y <span class='op'>=</span> <span class='st'>"Count"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="catch-22-text-analysis_files/figure-html5/unnamed-chunk-5-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<p><strong>Figure 1:</strong> Column graphs faceted by chapter to display top 5 most commonly used words in Joseph Heller’s <em>Catch-22</em> part 2 (chapters 15-28). Stop words such as “it”, “us”, and “a” were removed in addition to character names and titles.</p>
+<h3 id="top-50-words-in-catch-22-chapter-9-major-major-major-major">2) Top 50 Words in <em>Catch-22</em> Chapter 9: “Major Major Major Major”</h3>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#Getting top 50 words from chapter 9</span>
+<span class='va'>ch9_top50</span> <span class='op'>&lt;-</span> <span class='va'>nonstop_counts</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>chapter</span> <span class='op'>==</span> <span class='fl'>9</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>arrange</span><span class='op'>(</span><span class='op'>-</span><span class='va'>n</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>slice</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span><span class='op'>)</span>
+
+<span class='co'>#Reading in background image</span>
+<span class='va'>catch</span> <span class='op'>&lt;-</span> <span class='fu'>jpeg</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jpeg/man/readJPEG.html'>readJPEG</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='st'>"_posts"</span>, <span class='st'>"2021-02-25-catch-22-text-analysis"</span>, <span class='st'>"data"</span>, <span class='st'>"catch-221.jpg"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'>#Creating wordcloud</span>
+<span class='va'>ch9_cloud</span> <span class='op'>&lt;-</span> <span class='fu'>ggplot</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>ch9_top50</span>, <span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>word</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://rpkgs.datanovia.com/ggpubr/reference/background_image.html'>background_image</a></span><span class='op'>(</span><span class='va'>catch</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://lepennec.github.io/ggwordcloud/reference/geom_text_wordcloud.html'>geom_text_wordcloud</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>n</span>, size <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span>, shape <span class='op'>=</span> <span class='st'>"triangle-forward"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_gradientn</span><span class='op'>(</span>colors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"orange"</span>, <span class='st'>"orange2"</span>, <span class='st'>"orangered2"</span><span class='op'>)</span><span class='op'>)</span>  <span class='op'>+</span>
+  <span class='fu'>scale_size_area</span><span class='op'>(</span>max_size <span class='op'>=</span> <span class='fl'>23</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_minimal</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'>#Calling in output</span>
+<span class='va'>ch9_cloud</span>
+</code></pre>
+</div>
+</details>
+<p><img src="catch-22-text-analysis_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+</div>
+<p><strong>Figure 2:</strong> Wordcloud displaying the top 50 words used in <em>Catch-22</em> chapter 9: “Major Major Major Major”. Stop words were removed but character names were left intact to show the impact of a character named Major Major Major Major.</p>
+<h2 id="conduct-sentiment-analysis">Conduct Sentiment Analysis</h2>
+<p>We will conduct a sentiment analysis of Catch-22, looking at whether the words use in chapters of the book have positive or negative connotation in accordance with numerical ratings assigned by the AFINN lexicon. Given the book’s themes of war and absurdity and heavy usage of dark humor the expectation is a fairly consistent negative sentiment throughout the book</p>
+<h3 id="sentiment-analysis-of-catch-22-using-afinn-lexicon">3) Sentiment Analysis of <em>Catch-22</em> using AFINN lexicon</h3>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>catch22_afinn</span> <span class='op'>&lt;-</span> <span class='va'>catch22_nonstop</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>inner_join</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/tidytext/man/get_sentiments.html'>get_sentiments</a></span><span class='op'>(</span><span class='st'>"afinn"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>afinn_counts</span> <span class='op'>&lt;-</span> <span class='va'>catch22_afinn</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>chapter</span>, <span class='va'>value</span><span class='op'>)</span>
+
+<span class='va'>afinn_means</span> <span class='op'>&lt;-</span> <span class='va'>catch22_afinn</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>chapter</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>summarize</span><span class='op'>(</span>mean_afinn <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'>ggplot</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>afinn_means</span>,
+       <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>chapter</span>, y <span class='op'>=</span> <span class='va'>mean_afinn</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_col</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"goldenrod"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>coord_flip</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_minimal</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Chapter"</span>,
+       y <span class='op'>=</span> <span class='st'>"Mean Sentiment"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="catch-22-text-analysis_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+</div>
+<p><strong>Figure 3:</strong> Column graph showcasing the average sentiments of <em>Catch-22</em> using the AFINN lexicon. Mean sentiment values less than zero indicate that on average, the words used in a particular chapter had more negative connotations than those with mean sentiments greater than zero.</p>
+<h2 id="citation">Citation:</h2>
+<p>Heller, Joseph, 1798-1849. Catch-22, a Novel. New York :The Modern library, 1961.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

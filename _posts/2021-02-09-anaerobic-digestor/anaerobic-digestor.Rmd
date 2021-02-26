@@ -1,0 +1,27 @@
+---
+title: "anaerobic-digestor"
+description: |
+  This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus.
+author:
+  - name: joe walderman
+    url: {}
+date: 2021-02-09
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+---
+
+### Summary
+
+#### **Main Takeaways**
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Distill is a publication format for scientific and technical writing, native to the web.
+
+Learn more about using Distill at <https://rstudio.github.io/distill>.
+
+

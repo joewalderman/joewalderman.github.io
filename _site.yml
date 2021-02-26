@@ -1,7 +1,8 @@
 name: "."
 title: "Joe"
+theme: postcards.css
 description: |
-  joe walderman
+  Joe Walderman
 output_dir: "docs"
 navbar:
   right:

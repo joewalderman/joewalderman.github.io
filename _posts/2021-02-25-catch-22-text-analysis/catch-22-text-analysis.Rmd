@@ -1,0 +1,183 @@
+---
+title: "Text Analysis of Joseph Heller's Catch-22"
+description:
+  Utilizing a variety of text wrangling packages and techniques, we will analyze word usage frequency and sentiments from Joseph Heller's *Catch-22*.
+author:
+  - name: Joe Walderman
+    url: {}
+date: 02-25-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(tidyverse)
+library(tidytext)
+library(textdata)
+library(pdftools)
+library(ggwordcloud)
+library(reprex)
+library(here)
+library(jpeg)
+library(ggimage)
+library(png)
+library(ggpubr)
+library(viridis)
+```
+
+>"There was no telling what people might find out once they felt free to ask whatever questions they wanted to."
+
+## Catch-22 Text Wrangling
+
+Split up the text by line and trim excess white space
+
+```{r, cache = TRUE}
+# Reading in book pdf
+catch22 <- pdf_text(here("_posts", "2021-02-25-catch-22-text-analysis", "data", "Catch-22.pdf"))
+
+# Tidy data frame
+catch22_tidy <- data.frame(catch22) %>% 
+  mutate(text_full = str_split(catch22, pattern = "\\n")) %>% 
+  unnest(text_full) %>% #making each line its own observation
+  mutate(text_full = str_trim(text_full))
+
+catch22_df <- catch22_tidy %>% 
+  slice(-(1:54)) %>% #getting rid of preface and table of contents
+  mutate(chapter = case_when(
+    str_detect(text_full, pattern = "CHAPTER") ~ text_full,
+               TRUE ~ NA_character_
+  )) %>% 
+  fill(chapter) %>% 
+  separate(col = chapter, into = c("chap", "title"), sep = " - ", extra = "merge") %>% 
+  separate(col = chap, into = c("ch", "no"), sep = " ") %>% 
+  mutate(chapter = as.numeric(no))
+```
+
+Get word counts by chapter.
+
+```{r}
+#getting tokens
+catch22_tokens <- catch22_df %>% 
+  unnest_tokens(word, text_full) %>% 
+  select(-catch22)
+
+#wordcount by chapter
+catch22_count <- catch22_tokens %>% 
+  count(chapter, word)
+```
+
+Remove common stop words such as "it", "the", and "a".
+
+```{r}
+#stopword removal
+catch22_nonstop <- catch22_tokens %>% 
+  anti_join(stop_words)
+
+#wordcount without stopwords
+nonstop_counts <- catch22_nonstop %>% 
+  count(chapter, word)
+```
+
+Finally, remove common names and titles for a more interesting picture of word usage by chapter.
+
+```{r}
+names <- c("yossarian", "yossarian's", "milo", "clevinger", "cathcart", "lieutenant", "captain", "colonel", "daneeka", "joe", "havermeyer", "cargill", "aarfy", "dreedle", "whitcomb", "danby", "scheisskopf", "nately", "orr", "peckem", "dunbar", "dreedle", "havermeyer", "mcwatt", "scheisskopf's", "corporal", "milo's", "korn", "korn's", "ferredge", "cramer", "cramer's", "ewing", "ewing's", "duckett", "pazzo", "snowden", "giuseppe", "sanderson", "moodus", "irving's", "dobbs", "sergeant", "coverley", "cathcart's", "aarfy's", "oran", "sampson", "fortiori", "wes", "danby's", "dreedle's", "whitcomb's", "colonel's", "appleby", "major", "lieutenant's", "nately's", "chaplain", "chaplain's", "washington", "metcalf", "metcalf's", "halfoat", "halfoat's")
+
+names_df <- as.data.frame(names) %>% 
+  rename(word = names)
+
+no_names <- catch22_nonstop %>% 
+  anti_join(names_df)
+
+counts_no_names <- no_names %>% 
+  count(chapter, word)
+```
+
+## Visualize the Results
+
+### 1) Top 5 words in *Catch-22* part 2
+
+```{r, fig.align="center"}
+#Find the top 5 words for part 2
+
+top5_part2 <- counts_no_names %>% 
+  filter(chapter %in% c(15:28)) %>% 
+  group_by(chapter) %>% 
+  arrange(-n) %>% 
+  slice(1:5)
+
+#Making a visualization
+ggplot(data = top5_part2, aes(x = word, y = n)) +
+  geom_col(fill = "maroon") +
+  facet_wrap(~chapter, scales = "free") +
+  coord_flip() +
+  theme_minimal() +
+  theme(text = element_text(size = 8),
+        plot.title = element_text(hjust = .6, size = 13)) +
+  labs(x = "Word",
+       y = "Count")
+```
+
+**Figure 1:** Column graphs faceted by chapter to display top 5 most commonly used words in Joseph Heller's *Catch-22* part 2 (chapters 15-28). Stop words such as "it", "us", and "a" were removed in addition to character names and titles. 
+
+### 2) Top 50 Words in *Catch-22* Chapter 9: "Major Major Major Major"
+
+```{r}
+#Getting top 50 words from chapter 9
+ch9_top50 <- nonstop_counts %>% 
+  filter(chapter == 9) %>% 
+  arrange(-n) %>% 
+  slice(1:50)
+
+#Reading in background image
+catch <- jpeg::readJPEG(here("_posts", "2021-02-25-catch-22-text-analysis", "data", "catch-221.jpg"))
+
+#Creating wordcloud
+ch9_cloud <- ggplot(data = ch9_top50, aes(label = word)) +
+  background_image(catch) +
+  geom_text_wordcloud(aes(color = n, size = n), shape = "triangle-forward") +
+  scale_color_gradientn(colors = c("orange", "orange2", "orangered2"))  +
+  scale_size_area(max_size = 23) +
+  theme_minimal()
+
+#Calling in output
+ch9_cloud
+```
+
+**Figure 2:** Wordcloud displaying the top 50 words used in *Catch-22* chapter 9: "Major Major Major Major". Stop words were removed but character names were left intact to show the impact of a character named Major Major Major Major.
+
+## Conduct Sentiment Analysis
+
+We will conduct a sentiment analysis of Catch-22, looking at whether the words use in chapters of the book have positive or negative connotation in accordance with numerical ratings assigned by the AFINN lexicon. Given the book's themes of war and absurdity and heavy usage of dark humor the expectation is a fairly consistent negative sentiment throughout the book
+
+### 3) Sentiment Analysis of *Catch-22* using AFINN lexicon
+
+```{r}
+catch22_afinn <- catch22_nonstop %>% 
+  inner_join(get_sentiments("afinn"))
+
+afinn_counts <- catch22_afinn %>% 
+  count(chapter, value)
+
+afinn_means <- catch22_afinn %>% 
+  group_by(chapter) %>% 
+  summarize(mean_afinn = mean(value))
+
+ggplot(data = afinn_means,
+       aes(x = chapter, y = mean_afinn)) +
+  geom_col(fill = "goldenrod") +
+  coord_flip() +
+  theme_minimal() +
+  labs(x = "Chapter",
+       y = "Mean Sentiment")
+```
+
+**Figure 3:** Column graph showcasing the average sentiments of *Catch-22* using the AFINN lexicon. Mean sentiment values less than zero indicate that on average, the words used in a particular chapter had more negative connotations than those with mean sentiments greater than zero. 
+
+## Citation:
+Heller, Joseph, 1798-1849. Catch-22, a Novel. New York :The Modern library, 1961.
+
+
+
