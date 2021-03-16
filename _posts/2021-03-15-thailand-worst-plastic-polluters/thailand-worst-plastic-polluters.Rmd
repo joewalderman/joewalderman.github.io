@@ -1,0 +1,106 @@
+---
+title: "Thailand Worst Plastic Polluters"
+description: |
+  Companies contributing to the greatest portions of plastic polution in Thailand.
+author:
+  - name: Joe Walderman
+    url: {}
+date: 02-21-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+    theme: lumen
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(tidyverse)
+library(tidytuesdayR)
+library(glue)
+library(treemapify)
+library(ggtext)
+library(extrafont)
+```
+
+ #breakfreefromplastic is a global movement with support from over 12,000 organizations and individuals around the world. The goal of the movement is to reduce single-use plastics and work towrds solutions for the plastic pollution crisis.
+ 
+ <br>
+ 
+ In 2020, a collection of 905 volunteers collected 38,580 pieces of plastic from 115 companies in Thailand.
+
+```{r}
+plastics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-26/plastics.csv')
+
+
+
+
+##use data for pet,pp and ps type plastics only
+
+# Replace null with unbranded
+plastics_clean <- plastics %>%
+  # Replace null with Unbranded in Parent Company
+  mutate(parent_company = ifelse(tolower(parent_company) == 'null', 
+                                 'Unbranded', 
+                                 parent_company)) %>%
+  # Remove Grand Total in Parent Company
+  filter(!(tolower(parent_company) == "grand total")) %>%
+  # Standardize Nestlé vs Nestle
+  mutate(parent_company = ifelse(parent_company == 'Nestle',
+                                 'Nestlé',
+                                 parent_company)) %>%
+  # Make long by plastic type
+  pivot_longer(empty:grand_total, 
+               names_to = 'plastic_type', 
+               values_to = 'count',
+               values_drop_na = TRUE) %>%
+  # Remove 0 counts
+  filter(count != 0)
+
+
+plastics_philippines <- 
+  plastics %>% 
+  filter(year == 2020, !parent_company %in% c("Unbranded", "NULL", "null"), country == "Thailand") %>%    
+  mutate(parent_company = case_when(grand_total < 25 ~ "112 Other Companies",
+                                    TRUE ~ parent_company)) %>% 
+    add_count(parent_company)
+
+#Total plastic objects in The Philippines
+plastics_philippines %>% 
+  summarise(total = sum(grand_total)) -> philippines_total
+
+#Volunteers in The Philippines
+philippines_volunteers <- plastics_philippines[1, 14]
+
+#Companies in The Philippines
+philippines_companies <- nrow(plastics_philippines)
+
+#Plot colors  
+bigger <- "midnightblue"
+middle <- "slateblue3"
+small <- "skyblue4"
+other <- "magenta4"
+text <- "black"
+
+#Plot  
+plastics_philippines %>%  
+    group_by(parent_company) %>%  
+    summarise(grand_total = sum(grand_total)) %>% 
+    mutate(parent_company = paste0(parent_company, "\n(", grand_total, ")"),
+           group = case_when(grand_total > 250 ~ glue("{bigger}"),
+                             grand_total > 100 ~ glue("{middle}"),
+                             grand_total == 243 ~ glue("{other}"),
+                             TRUE ~ glue("{small}"))) %>% 
+    ggplot(aes(area = grand_total, label = parent_company, fill = group)) +
+    geom_treemap() +
+    geom_treemap_text(color = "white", reflow = TRUE) +
+    scale_fill_identity() +
+    labs(title = "**Worst Plastic Polluting Companies in Thailand**<br>",
+         caption = "2 Feb 2021 #TidyTuesday dataset || Joe Walderman || Inspired by @luisfreii") +
+    theme(plot.margin = unit(c(2, 2, 2, 2), "lines"),
+          plot.title = element_markdown(hjust = .5, size = 14, color = text),
+          plot.subtitle = element_markdown(hjust = .5, color = text),
+          plot.caption = element_markdown(hjust = .5, color = text)
+          )
+

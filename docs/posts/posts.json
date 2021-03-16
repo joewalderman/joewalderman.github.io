@@ -34,6 +34,23 @@
     "input_file": {}
   },
   {
+    "path": "posts/2021-03-15-thailand-worst-plastic-polluters/",
+    "title": "Thailand Worst Plastic Polluters",
+    "description": "Companies contributing to the greatest portions of plastic polution in Thailand.",
+    "author": [
+      {
+        "name": "Joe Walderman",
+        "url": {}
+      }
+    ],
+    "date": "2021-02-21",
+    "categories": [],
+    "contents": "\r\n#breakfreefromplastic is a global movement with support from over 12,000 organizations and individuals around the world. The goal of the movement is to reduce single-use plastics and work towrds solutions for the plastic pollution crisis.\r\n\r\nIn 2020, a collection of 905 volunteers collected 38,580 pieces of plastic from 115 companies in Thailand.\r\n\r\nhide\r\nplastics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-26/plastics.csv')\r\n\r\n\r\n\r\n\r\n##use data for pet,pp and ps type plastics only\r\n\r\n# Replace null with unbranded\r\nplastics_clean <- plastics %>%\r\n  # Replace null with Unbranded in Parent Company\r\n  mutate(parent_company = ifelse(tolower(parent_company) == 'null', \r\n                                 'Unbranded', \r\n                                 parent_company)) %>%\r\n  # Remove Grand Total in Parent Company\r\n  filter(!(tolower(parent_company) == \"grand total\")) %>%\r\n  # Standardize Nestlé vs Nestle\r\n  mutate(parent_company = ifelse(parent_company == 'Nestle',\r\n                                 'Nestlé',\r\n                                 parent_company)) %>%\r\n  # Make long by plastic type\r\n  pivot_longer(empty:grand_total, \r\n               names_to = 'plastic_type', \r\n               values_to = 'count',\r\n               values_drop_na = TRUE) %>%\r\n  # Remove 0 counts\r\n  filter(count != 0)\r\n\r\n\r\nplastics_philippines <- \r\n  plastics %>% \r\n  filter(year == 2020, !parent_company %in% c(\"Unbranded\", \"NULL\", \"null\"), country == \"Thailand\") %>%    \r\n  mutate(parent_company = case_when(grand_total < 25 ~ \"112 Other Companies\",\r\n                                    TRUE ~ parent_company)) %>% \r\n    add_count(parent_company)\r\n\r\n#Total plastic objects in The Philippines\r\nplastics_philippines %>% \r\n  summarise(total = sum(grand_total)) -> philippines_total\r\n\r\n#Volunteers in The Philippines\r\nphilippines_volunteers <- plastics_philippines[1, 14]\r\n\r\n#Companies in The Philippines\r\nphilippines_companies <- nrow(plastics_philippines)\r\n\r\n#Plot colors  \r\nbigger <- \"midnightblue\"\r\nmiddle <- \"slateblue3\"\r\nsmall <- \"skyblue4\"\r\nother <- \"magenta4\"\r\ntext <- \"black\"\r\n\r\n#Plot  \r\nplastics_philippines %>%  \r\n    group_by(parent_company) %>%  \r\n    summarise(grand_total = sum(grand_total)) %>% \r\n    mutate(parent_company = paste0(parent_company, \"\\n(\", grand_total, \")\"),\r\n           group = case_when(grand_total > 250 ~ glue(\"{bigger}\"),\r\n                             grand_total > 100 ~ glue(\"{middle}\"),\r\n                             grand_total == 243 ~ glue(\"{other}\"),\r\n                             TRUE ~ glue(\"{small}\"))) %>% \r\n    ggplot(aes(area = grand_total, label = parent_company, fill = group)) +\r\n    geom_treemap() +\r\n    geom_treemap_text(color = \"white\", reflow = TRUE) +\r\n    scale_fill_identity() +\r\n    labs(title = \"**Worst Plastic Polluting Companies in Thailand**<br>\",\r\n         caption = \"2 Feb 2021 #TidyTuesday dataset || Joe Walderman || Inspired by @luisfreii\") +\r\n    theme(plot.margin = unit(c(2, 2, 2, 2), \"lines\"),\r\n          plot.title = element_markdown(hjust = .5, size = 14, color = text),\r\n          plot.subtitle = element_markdown(hjust = .5, color = text),\r\n          plot.caption = element_markdown(hjust = .5, color = text)\r\n          )\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/2021-03-15-thailand-worst-plastic-polluters/thailand-worst-plastic-polluters_files/figure-html5/unnamed-chunk-1-1.png",
+    "last_modified": "2021-03-15T19:45:53-07:00",
+    "input_file": "thailand-worst-plastic-polluters.utf8.md"
+  },
+  {
     "path": "posts/2021-03-15-solar-array-suitability/",
     "title": "Solar Array Suitability",
     "description": "GIS model designed to identify sitess on Universtiy of Richmond campus suitable for installing a 204.8 kW solar array consisting of 748 bifacial panels.",
