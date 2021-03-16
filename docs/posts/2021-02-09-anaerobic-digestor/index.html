@@ -20,18 +20,19 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -51,7 +52,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
@@ -85,18 +86,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Joe: anaerobic-digestor</title>
+<title>Joe: Achieving Waste &amp; Emissions Reduction Goals on University of Richmond Campus</title>
 
 <meta property="description" itemprop="description" content="This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-02-09"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-02-09"/>
-<meta name="article:author" content="joe walderman"/>
+<meta property="article:published" itemprop="datePublished" content="2017-04-20"/>
+<meta property="article:created" itemprop="dateCreated" content="2017-04-20"/>
+<meta name="article:author" content="Joe Walderman"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Joe: anaerobic-digestor"/>
+<meta property="og:title" content="Joe: Achieving Waste &amp; Emissions Reduction Goals on University of Richmond Campus"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus."/>
 <meta property="og:locale" content="en_US"/>
@@ -104,19 +105,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Joe: anaerobic-digestor"/>
+<meta property="twitter:title" content="Joe: Achieving Waste &amp; Emissions Reduction Goals on University of Richmond Campus"/>
 <meta property="twitter:description" content="This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["anaerobic-digestor"]},{"type":"character","attributes":{},"value":["This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["joe walderman"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2021-02-09"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["hide"]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Achieving Waste & Emissions Reduction Goals on University of Richmond Campus"]},{"type":"character","attributes":{},"value":["This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Joe Walderman"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2017-04-20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding","theme"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["hide"]},{"type":"character","attributes":{},"value":["lumen"]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["anaerobic-digestor_files/anchor-4.2.2/anchor.min.js","anaerobic-digestor_files/bowser-1.9.3/bowser.min.js","anaerobic-digestor_files/distill-2.2.21/template.v2.js","anaerobic-digestor_files/header-attrs-2.6.6/header-attrs.js","anaerobic-digestor_files/jquery-1.11.3/jquery.min.js","anaerobic-digestor_files/popper-2.6.0/popper.min.js","anaerobic-digestor_files/tippy-6.2.7/tippy-bundle.umd.min.js","anaerobic-digestor_files/tippy-6.2.7/tippy-light-border.css","anaerobic-digestor_files/tippy-6.2.7/tippy.css","anaerobic-digestor_files/tippy-6.2.7/tippy.umd.min.js","anaerobic-digestor_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["anaerobic-digestor_files/anchor-4.2.2/anchor.min.js","anaerobic-digestor_files/bowser-1.9.3/bowser.min.js","anaerobic-digestor_files/distill-2.2.21/template.v2.js","anaerobic-digestor_files/header-attrs-2.6.6/header-attrs.js","anaerobic-digestor_files/jquery-1.11.3/jquery.min.js","anaerobic-digestor_files/popper-2.6.0/popper.min.js","anaerobic-digestor_files/tippy-6.2.7/tippy-bundle.umd.min.js","anaerobic-digestor_files/tippy-6.2.7/tippy-light-border.css","anaerobic-digestor_files/tippy-6.2.7/tippy.css","anaerobic-digestor_files/tippy-6.2.7/tippy.umd.min.js","anaerobic-digestor_files/webcomponents-2.0.0/webcomponents.js","digestor.pdf"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2350,7 +2351,6 @@ d-appendix d-footnote-list a.footnote-backlink {
   color: var(--hover-color, white);
 }</style>
 <!--/radix_placeholder_distill-->
-  <script src="../../site_libs/header-attrs-2.6.6/header-attrs.js"></script>
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -2371,7 +2371,7 @@ d-appendix d-footnote-list a.footnote-backlink {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"anaerobic-digestor","description":"This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus.","authors":[{"author":"joe walderman","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-02-09T00:00:00.000-08:00","citationText":"walderman, 2021"}
+{"title":"Achieving Waste & Emissions Reduction Goals on University of Richmond Campus","description":"This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus.","authors":[{"author":"Joe Walderman","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2017-04-20T00:00:00.000-07:00","citationText":"Walderman, 2017"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2396,23 +2396,35 @@ d-appendix d-footnote-list a.footnote-backlink {
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>anaerobic-digestor</h1>
+<h1>Achieving Waste &amp; Emissions Reduction Goals on University of Richmond Campus</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus.</p></p>
 </div>
 
 <div class="d-byline">
-  joe walderman true 
+  Joe Walderman true 
   
-<br/>2021-02-09
+<br/>2017-04-20
 </div>
 
 <div class="d-article">
-<h3 id="summary">Summary</h3>
-<h4 id="main-takeaways"><strong>Main Takeaways</strong></h4>
-<p>Distill is a publication format for scientific and technical writing, native to the web.</p>
-<p>Learn more about using Distill at <a href="https://rstudio.github.io/distill" class="uri">https://rstudio.github.io/distill</a>.</p>
+<h3 id="abstract"><strong>Abstract</strong></h3>
+<p>This project proposes the installation of a small-scale anaerobic digester (biodigester). This is a reactor that breaks down biodegradable organic waste producing biogas. Food waste is considered one of the most efficient for producing biogas of typical biodigester feedstocks (Poschl, 2010). The UR Dining Hall produces 614 lbs of food waste per day to be used as feedstock, with landscaping scraps available for additional feed. The University boiler plant is capable of using biogas for heat production, making the plant a suitable destination for the digester’s waste output. The digester may allow for waste diversion and greenhouse gas (GHG) emissions reductions while also saving money on transportation and natural gas.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>hide</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"digestor.pdf"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<embed src="digestor.pdf" width="120%" height="320%" type="application/pdf" />
+</div>
+<h3 id="main-takeaways"><strong>Main Takeaways</strong></h3>
+<p>Based on our analysis, the implementation of a biodigester on campus would provide a variety of benefits to the University, while also helping to achieve the University’s goals in waste and GHG emission reductions. We propose diverting pre- and post-consumer waste from HDC, along with input from landscaping, to the biodigester. Each student produces 2.0-2.6 ounces of waste per meal, times 30,000 customers a week (roughly). This equates to 3,750 pounds of postconsumer food waste per week, to be supplemented by 3,000-5,000 pounds per week of preconsumer food waste, and varied but negligible amounts of landscaping scraps. Assuming the minimum amount of operating weeks for the University in Fall and Spring semesters at 30 weeks, HDC is producing 56 tons of food waste annually, all of which could go to the digester. This would produce 1,487 MCF of biogas per year. We propose diverting the produced biogas to the steam plant on campus, to be mixed with natural gas to produce cleaner heat energy. This output would save the University $5,052.78 on natural gas and transportation costs annually.</p>
+<h4 id="recommended-citation"><strong>Recommended Citation</strong></h4>
+<p>Walderman, Joe and Alexa Williams. “Achieving Waste &amp; Emissions Reduction Goals on University of Richmond Campus: The Biodigester Approach.” Poster session for Environmental Studies Senior Seminar/Geography Capstone, University of Richmond, April 20, 2017.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

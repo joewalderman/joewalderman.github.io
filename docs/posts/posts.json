@@ -34,21 +34,21 @@
     "input_file": {}
   },
   {
-    "path": "posts/2021-02-09-anaerobic-digestor/",
-    "title": "anaerobic-digestor",
-    "description": "This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus.",
+    "path": "posts/2021-03-15-solar-array-suitability/",
+    "title": "Solar Array Suitability",
+    "description": "GIS model designed to identify sitess on Universtiy of Richmond campus suitable for installing a 204.8 kW solar array consisting of 748 bifacial panels.",
     "author": [
       {
-        "name": "joe walderman",
+        "name": "Joe Walderman",
         "url": {}
       }
     ],
-    "date": "2021-02-09",
+    "date": "2021-02-17",
     "categories": [],
-    "contents": "\nSummary\nMain Takeaways\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill at https://rstudio.github.io/distill.\n\n\n\n",
+    "contents": "\r\nAbstract\r\nThe purpose of our project is to analyze certain aspects of the University of Richmond campus geography to determine the most suitable locations for the implementation of additional solar panel arrays. We utilized available LIDAR data to generate a digital elevation model. From there we filtered locations using slope, elevation, aspect, and solar radiation masks. With this criteria we built a model that identified the most efficient locations for the introduction of solar panels on the Richmond campus.\r\n\r\nhide\r\nknitr::include_graphics(\"SolarPoster.pdf\")\r\n\r\n\r\n\r\nMain Takeaways\r\nWe were able to conclude from our project that the 204.8 kW solar array on the roof of the Weinstein Center for Recreation and Wellness, consisting of 749 bifacial panels covering roughly 22,000 square feet were not sited for maximum efficiency. Implementing the array just 50 feet away on the roof of the Robins Center, rathe than the adjacent recreation center would have been optimal based on our criteria and analysis. The Office of Sustainability has recognized our efforts and will use our model going forward with future solar energy projects.\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2021-02-09T20:34:33-08:00",
-    "input_file": {}
+    "last_modified": "2021-03-15T19:26:03-07:00",
+    "input_file": "solar-array-suitability.utf8.md"
   },
   {
     "path": "posts/2021-01-21-welcome/",
@@ -66,5 +66,22 @@
     "preview": {},
     "last_modified": "2021-02-07T22:35:33-08:00",
     "input_file": {}
+  },
+  {
+    "path": "posts/2021-02-09-anaerobic-digestor/",
+    "title": "Achieving Waste & Emissions Reduction Goals on University of Richmond Campus",
+    "description": "This post contains the final product of my senior capstone project, proposing the implementation of an anaerobic digestor on the University of Richmond campus.",
+    "author": [
+      {
+        "name": "Joe Walderman",
+        "url": {}
+      }
+    ],
+    "date": "2017-04-20",
+    "categories": [],
+    "contents": "\r\nAbstract\r\nThis project proposes the installation of a small-scale anaerobic digester (biodigester). This is a reactor that breaks down biodegradable organic waste producing biogas. Food waste is considered one of the most efficient for producing biogas of typical biodigester feedstocks (Poschl, 2010). The UR Dining Hall produces 614 lbs of food waste per day to be used as feedstock, with landscaping scraps available for additional feed. The University boiler plant is capable of using biogas for heat production, making the plant a suitable destination for the digester’s waste output. The digester may allow for waste diversion and greenhouse gas (GHG) emissions reductions while also saving money on transportation and natural gas.\r\n\r\nhide\r\nknitr::include_graphics(\"digestor.pdf\")\r\n\r\n\r\n\r\nMain Takeaways\r\nBased on our analysis, the implementation of a biodigester on campus would provide a variety of benefits to the University, while also helping to achieve the University’s goals in waste and GHG emission reductions. We propose diverting pre- and post-consumer waste from HDC, along with input from landscaping, to the biodigester. Each student produces 2.0-2.6 ounces of waste per meal, times 30,000 customers a week (roughly). This equates to 3,750 pounds of postconsumer food waste per week, to be supplemented by 3,000-5,000 pounds per week of preconsumer food waste, and varied but negligible amounts of landscaping scraps. Assuming the minimum amount of operating weeks for the University in Fall and Spring semesters at 30 weeks, HDC is producing 56 tons of food waste annually, all of which could go to the digester. This would produce 1,487 MCF of biogas per year. We propose diverting the produced biogas to the steam plant on campus, to be mixed with natural gas to produce cleaner heat energy. This output would save the University $5,052.78 on natural gas and transportation costs annually.\r\nRecommended Citation\r\nWalderman, Joe and Alexa Williams. “Achieving Waste & Emissions Reduction Goals on University of Richmond Campus: The Biodigester Approach.” Poster session for Environmental Studies Senior Seminar/Geography Capstone, University of Richmond, April 20, 2017.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-03-15T19:14:26-07:00",
+    "input_file": "anaerobic-digestor.utf8.md"
   }
 ]

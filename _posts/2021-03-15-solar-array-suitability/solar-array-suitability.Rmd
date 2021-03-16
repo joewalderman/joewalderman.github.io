@@ -1,0 +1,28 @@
+---
+title: "Solar Array Suitability"
+description: |
+ GIS model designed to identify sitess on Universtiy of Richmond campus suitable for installing a 204.8 kW solar array consisting of 748 bifacial panels.
+author:
+  - name: Joe Walderman
+    url: {}
+date: 02-17-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+    theme: lumen
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+### **Abstract**
+
+The purpose of our project is to analyze certain aspects of the University of Richmond campus geography to determine the most suitable locations for the implementation of additional solar panel arrays. We utilized available LIDAR data to generate a digital elevation model. From there we filtered locations using slope, elevation, aspect, and solar radiation masks. With this criteria we built a model that identified the most efficient locations for the introduction of solar panels on the Richmond campus.
+
+```{r, out.width="120%", out.height="320%"}
+knitr::include_graphics("SolarPoster.pdf")
+```
+
+### **Main Takeaways**
+
+We were able to conclude from our project that the 204.8 kW solar array on the roof of the Weinstein Center for Recreation and Wellness, consisting of 749 bifacial panels covering roughly 22,000 square feet were not sited for maximum efficiency. Implementing the array just 50 feet away on the roof of the Robins Center, rather than the adjacent recreation center would have been optimal based on our criteria and analysis. The Office of Sustainability has recognized our efforts and will use our model going forward with future solar energy projects.
