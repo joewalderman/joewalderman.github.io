@@ -47,42 +47,8 @@
     "categories": [],
     "contents": "\r\n#breakfreefromplastic is a global movement with support from over 12,000 organizations and individuals around the world. The goal of the movement is to reduce single-use plastics and work towrds solutions for the plastic pollution crisis.\r\n\r\nIn 2020, a collection of 905 volunteers collected 38,580 pieces of plastic from 115 companies in Thailand.\r\n\r\nhide\r\nplastics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-26/plastics.csv')\r\n\r\n\r\n\r\n\r\n##use data for pet,pp and ps type plastics only\r\n\r\n# Replace null with unbranded\r\nplastics_clean <- plastics %>%\r\n  # Replace null with Unbranded in Parent Company\r\n  mutate(parent_company = ifelse(tolower(parent_company) == 'null', \r\n                                 'Unbranded', \r\n                                 parent_company)) %>%\r\n  # Remove Grand Total in Parent Company\r\n  filter(!(tolower(parent_company) == \"grand total\")) %>%\r\n  # Standardize Nestlé vs Nestle\r\n  mutate(parent_company = ifelse(parent_company == 'Nestle',\r\n                                 'Nestlé',\r\n                                 parent_company)) %>%\r\n  # Make long by plastic type\r\n  pivot_longer(empty:grand_total, \r\n               names_to = 'plastic_type', \r\n               values_to = 'count',\r\n               values_drop_na = TRUE) %>%\r\n  # Remove 0 counts\r\n  filter(count != 0)\r\n\r\n\r\nplastics_philippines <- \r\n  plastics %>% \r\n  filter(year == 2020, !parent_company %in% c(\"Unbranded\", \"NULL\", \"null\"), country == \"Thailand\") %>%    \r\n  mutate(parent_company = case_when(grand_total < 25 ~ \"112 Other Companies\",\r\n                                    TRUE ~ parent_company)) %>% \r\n    add_count(parent_company)\r\n\r\n#Total plastic objects in The Philippines\r\nplastics_philippines %>% \r\n  summarise(total = sum(grand_total)) -> philippines_total\r\n\r\n#Volunteers in The Philippines\r\nphilippines_volunteers <- plastics_philippines[1, 14]\r\n\r\n#Companies in The Philippines\r\nphilippines_companies <- nrow(plastics_philippines)\r\n\r\n#Plot colors  \r\nbigger <- \"midnightblue\"\r\nmiddle <- \"slateblue3\"\r\nsmall <- \"skyblue4\"\r\nother <- \"magenta4\"\r\ntext <- \"black\"\r\n\r\n#Plot  \r\nplastics_philippines %>%  \r\n    group_by(parent_company) %>%  \r\n    summarise(grand_total = sum(grand_total)) %>% \r\n    mutate(parent_company = paste0(parent_company, \"\\n(\", grand_total, \")\"),\r\n           group = case_when(grand_total > 250 ~ glue(\"{bigger}\"),\r\n                             grand_total > 100 ~ glue(\"{middle}\"),\r\n                             grand_total == 243 ~ glue(\"{other}\"),\r\n                             TRUE ~ glue(\"{small}\"))) %>% \r\n    ggplot(aes(area = grand_total, label = parent_company, fill = group)) +\r\n    geom_treemap() +\r\n    geom_treemap_text(color = \"white\", reflow = TRUE) +\r\n    scale_fill_identity() +\r\n    labs(title = \"**Worst Plastic Polluting Companies in Thailand**<br>\",\r\n         caption = \"2 Feb 2021 #TidyTuesday dataset || Joe Walderman || Inspired by @luisfreii\") +\r\n    theme(plot.margin = unit(c(2, 2, 2, 2), \"lines\"),\r\n          plot.title = element_markdown(hjust = .5, size = 14, color = text),\r\n          plot.subtitle = element_markdown(hjust = .5, color = text),\r\n          plot.caption = element_markdown(hjust = .5, color = text)\r\n          )\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": "posts/2021-03-15-thailand-worst-plastic-polluters/thailand-worst-plastic-polluters_files/figure-html5/unnamed-chunk-1-1.png",
-    "last_modified": "2021-03-15T19:45:53-07:00",
+    "last_modified": "2021-03-15T19:50:38-07:00",
     "input_file": "thailand-worst-plastic-polluters.utf8.md"
-  },
-  {
-    "path": "posts/2021-03-15-solar-array-suitability/",
-    "title": "Solar Array Suitability",
-    "description": "GIS model designed to identify sitess on Universtiy of Richmond campus suitable for installing a 204.8 kW solar array consisting of 748 bifacial panels.",
-    "author": [
-      {
-        "name": "Joe Walderman",
-        "url": {}
-      }
-    ],
-    "date": "2021-02-17",
-    "categories": [],
-    "contents": "\r\nAbstract\r\nThe purpose of our project is to analyze certain aspects of the University of Richmond campus geography to determine the most suitable locations for the implementation of additional solar panel arrays. We utilized available LIDAR data to generate a digital elevation model. From there we filtered locations using slope, elevation, aspect, and solar radiation masks. With this criteria we built a model that identified the most efficient locations for the introduction of solar panels on the Richmond campus.\r\n\r\nhide\r\nknitr::include_graphics(\"SolarPoster.pdf\")\r\n\r\n\r\n\r\nMain Takeaways\r\nWe were able to conclude from our project that the 204.8 kW solar array on the roof of the Weinstein Center for Recreation and Wellness, consisting of 749 bifacial panels covering roughly 22,000 square feet were not sited for maximum efficiency. Implementing the array just 50 feet away on the roof of the Robins Center, rathe than the adjacent recreation center would have been optimal based on our criteria and analysis. The Office of Sustainability has recognized our efforts and will use our model going forward with future solar energy projects.\r\n\r\n\r\n\r\n",
-    "preview": {},
-    "last_modified": "2021-03-15T19:26:03-07:00",
-    "input_file": "solar-array-suitability.utf8.md"
-  },
-  {
-    "path": "posts/2021-01-21-welcome/",
-    "title": "welcome",
-    "description": "Wlcome to my blog!",
-    "author": [
-      {
-        "name": "joe walderman",
-        "url": {}
-      }
-    ],
-    "date": "2021-01-21",
-    "categories": [],
-    "contents": "\n\n\n\n",
-    "preview": {},
-    "last_modified": "2021-02-07T22:35:33-08:00",
-    "input_file": {}
   },
   {
     "path": "posts/2021-02-09-anaerobic-digestor/",
@@ -100,5 +66,22 @@
     "preview": {},
     "last_modified": "2021-03-15T19:14:26-07:00",
     "input_file": "anaerobic-digestor.utf8.md"
+  },
+  {
+    "path": "posts/2021-03-15-solar-array-suitability/",
+    "title": "Solar Array Suitability",
+    "description": "GIS model designed to identify sitess on Universtiy of Richmond campus suitable for installing a 204.8 kW solar array consisting of 748 bifacial panels.",
+    "author": [
+      {
+        "name": "Joe Walderman",
+        "url": {}
+      }
+    ],
+    "date": "2017-02-17",
+    "categories": [],
+    "contents": "\r\nAbstract\r\nThe purpose of our project is to analyze certain aspects of the University of Richmond campus geography to determine the most suitable locations for the implementation of additional solar panel arrays. We utilized available LIDAR data to generate a digital elevation model. From there we filtered locations using slope, elevation, aspect, and solar radiation masks. With this criteria we built a model that identified the most efficient locations for the introduction of solar panels on the Richmond campus.\r\n\r\nhide\r\nknitr::include_graphics(\"SolarPoster.pdf\")\r\n\r\n\r\n\r\nMain Takeaways\r\nWe were able to conclude from our project that the 204.8 kW solar array on the roof of the Weinstein Center for Recreation and Wellness, consisting of 749 bifacial panels covering roughly 22,000 square feet were not sited for maximum efficiency. Implementing the array just 50 feet away on the roof of the Robins Center, rather than the adjacent recreation center would have been optimal based on our criteria and analysis. The Office of Sustainability has recognized our efforts and will use our model going forward with future solar energy projects.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-03-15T19:52:22-07:00",
+    "input_file": "solar-array-suitability.utf8.md"
   }
 ]
